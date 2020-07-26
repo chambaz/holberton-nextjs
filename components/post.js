@@ -3,7 +3,21 @@ import Link from 'next/link'
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
 
 export default function Post(props) {
-  const [liked, setLiked] = useState(false)
+  const [liked, setLiked] = useState(props.data.liked)
+
+  async function like() {
+    setLiked(!props.data.liked)
+
+    const response = await fetch(
+      `http://localhost:3000/api/posts/${props.data.id}`,
+      {
+        method: 'POST',
+      }
+    )
+    const json = await response.json()
+
+    setLiked(json.post.liked)
+  }
 
   return (
     <article className="bg-white shadow">
@@ -17,10 +31,17 @@ export default function Post(props) {
         </div>
       </Link>
       <div className="flex justify-end px-2 pb-2">
-        <div onClick={(e) => setLiked(!liked)} className="cursor-pointer">
+        <div onClick={like} className="cursor-pointer">
           {liked ? <FaHeart /> : <FaRegHeart />}
         </div>
       </div>
     </article>
   )
+}
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`http://localhost:3000/api/post/${context.params.id}`)
+  const data = await res.json()
+
+  return { props: data }
 }

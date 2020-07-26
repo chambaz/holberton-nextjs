@@ -4,9 +4,9 @@
 
 .markdown {
   @apply text-lg leading-loose;
-  & > * + *,
-  & li + li,
-  & li > p + p {
+  & p,
+  & ul,
+  & ol {
     @apply mt-12;
   }
   & strong {
@@ -33,11 +33,14 @@
   & blockquote {
     @apply border-l-4 pl-4 italic;
   }
+  & ul {
+    list-style: disc;
+  }
+  & ol {
+    list-style: decimal;
+  }
   & ul,
   & ol {
-    @apply pl-5;
-    @screen sm {
-      @apply pl-10;
-    }
+    @apply ml-6;
   }
 }
