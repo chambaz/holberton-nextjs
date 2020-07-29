@@ -9,7 +9,7 @@ export default function Post(props) {
     setLiked(!props.data.liked)
 
     const response = await fetch(
-      `${process.env.API_URL}/api/posts/${props.data.id}`,
+      `https://localhost:3000/api/posts/${props.data.id}`,
       {
         method: 'POST',
       }
