@@ -19,7 +19,7 @@ export default function Post(props) {
 
 export async function getServerSideProps(context) {
   const res = await fetch(
-    `http://localhost:3000/api/posts/${context.params.id}`
+    `${process.env.API_URL}/api/posts/${context.params.id}`
   )
   const data = await res.json()
 

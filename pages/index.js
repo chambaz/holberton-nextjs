@@ -16,7 +16,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch('http://localhost:3000/api/posts/all')
+  const res = await fetch(`${process.env.API_URL}/api/posts/all`)
   const data = await res.json()
 
   return { props: data }
