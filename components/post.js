@@ -38,10 +38,3 @@ export default function Post(props) {
     </article>
   )
 }
-
-export async function getServerSideProps(context) {
-  const res = await fetch(`http://localhost:3000/api/post/${context.params.id}`)
-  const data = await res.json()
-
-  return { props: data }
-}
